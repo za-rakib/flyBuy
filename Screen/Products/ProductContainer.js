@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import ProductList from "./ProductList";
 import SearchProduct from "./SearchProduct";
@@ -14,21 +14,35 @@ import {
   SearchIcon,
 } from "native-base";
 import Banner from "../../Shared/Banner";
-const data = require("../../assets/data/084 products.json");
+import CategoryFilter from "./CategoryFilter";
+const data = require("../../assets/data/products.json");
+const productsCategories = require("../../assets/data/categories.json");
 
 const ProductContainer = () => {
   const [products, setProducts] = useState([]);
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [focus, setFocus] = useState();
 
+  const [categories, setCategory] = useState([]);
+  const [productCategory, setProductCategory] = useState([]);
+  const [active, setActive] = useState();
+  const [initialState, setInitialState] = useState([]);
+
   useEffect(() => {
     setProducts(data);
     setProductsFiltered(data);
     setFocus(false);
+    setCategory(productsCategories);
+    setProductCategory(data);
+    setActive(-1);
+    setInitialState(data);
     return () => {
       setProducts([]);
       setProductsFiltered([]);
       setFocus();
+      setCategory([]);
+      setActive();
+      setInitialState();
     };
   }, []);
 
@@ -50,6 +64,21 @@ const ProductContainer = () => {
   const openBlur = () => {
     setFocus(false);
   };
+
+  //categories
+  const categoryFilter = (ctg) => {
+    {
+      ctg === "all"
+        ? [setProductCategory(initialState), setActive(true)]
+        : [
+            setProductCategory(
+              products.filter((item) => item.category.$oid == ctg.$oid)
+            ),
+            setActive(true),
+          ];
+    }
+  };
+
   return (
     <NativeBaseProvider>
       <VStack>
@@ -72,17 +101,33 @@ const ProductContainer = () => {
       {focus == true ? (
         <SearchProduct productsFiltered={productsFiltered} />
       ) : (
-        <View>
+        <ScrollView>
+          <View>
             <View>
-                <Banner/>
+              <Banner />
             </View>
-          <FlatList
-            data={products}
-            renderItem={({ item }) => <ProductList key={item.id} item={item} />}
-            keyExtractor={(item) => item.name}
-            numColumns={2}
-          />
-        </View>
+            <View>
+              <CategoryFilter
+                categories={categories}
+                categoryFilter={categoryFilter}
+                productsCategory={productCategory}
+                active={active}
+                setActive={setActive}
+              />
+            </View>
+            {productCategory.length > 0 ? (
+              <View style={styles.listContainer}>
+                {productCategory.map((item, index) => (
+                  <ProductList key={index} item={item} />
+                ))}
+              </View>
+            ) : (
+              <View style={styles.noMatch}>
+                <Text style={styles.noMatchText}>No Product found</Text>
+              </View>
+            )}
+          </View>
+        </ScrollView>
       )}
     </NativeBaseProvider>
   );
@@ -96,8 +141,27 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 50,
   },
+  listContainer: {
+    flex: 1,
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    flexWrap: "wrap",
+    backgroundColor: "gainsboro",
+  },
   closeIcon: {
     position: "absolute",
     color: "white",
+  },
+  noMatch: {
+    backgroundColor: "#f2f2f2",
+    marginTop: 20,
+  },
+  noMatchText: {
+    color: "red",
+    fontSize: 25,
+    padding: 10,
+    alignSelf: "center",
+    justifyContent: "center",
   },
 });

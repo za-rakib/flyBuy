@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import ProductCard from "./ProductCard";
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   card: {
-    width: width /2,
+    width: width / 2,
     backgroundColor: "gainsboro",
   },
 });

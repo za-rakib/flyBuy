@@ -14,7 +14,7 @@ export default function Banner() {
   const [bannerData, setBannerData] = useState([]);
   useEffect(() => {
     setBannerData([
-      "https://cdn.pixabay.com/photo/2014/09/07/22/34/car-race-438467_960_720.jpg",
+      "https://cdn.pixabay.com/photo/2014/07/31/23/00/wristwatch-407096_960_720.jpg",
       "https://cdn.pixabay.com/photo/2020/10/21/18/07/laptop-5673901_960_720.jpg",
       "https://cdn.pixabay.com/photo/2016/12/19/08/39/mobile-phone-1917737_960_720.jpg",
     ]);
