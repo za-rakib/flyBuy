@@ -29,7 +29,7 @@ const CategoryFilter = (props) => {
               props.active == -1 ? styles.active : styles.inactive,
             ]}
           >
-            <Text style={{ color: "white", padding: 3 }}>All</Text>
+            <Text style={{ color: "white", padding: 5,fontSize:15 }}>All</Text>
           </Badge>
         </TouchableOpacity>
 
@@ -47,7 +47,7 @@ const CategoryFilter = (props) => {
                 props.active == index ? styles.active : styles.inactive,
               ]}
             >
-              <Text style={{ color: "white", padding: 3 }}>{item.name}</Text>
+              <Text style={{ color: "white", padding: 5,fontSize:15 }}>{item.name}</Text>
             </Badge>
           </TouchableOpacity>
         ))}

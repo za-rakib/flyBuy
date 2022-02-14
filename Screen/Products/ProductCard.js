@@ -29,7 +29,7 @@ const ProductCard = ({ item }) => {
       </Text>
       <Text style={styles.price}>$ {price}</Text>
       {countInStock > 0 ? (
-        <View style={{ marginBottom: 60 }}>
+        <View style={{ marginBottom: 30 }}>
           <Button title={"Add"} color={"green"} />
         </View>
       ) : (
@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     marginTop: 55,
     borderRadius: 10,
     alignItems: "center",
-    marginBottom: 5,
     marginLeft: 10,
     elevation: 8,
     backgroundColor: "white",
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
     height: width / 2 - 20 - 30,
     backgroundColor: "transparent",
     position: "absolute",
-    top: -45,
+    top: -35,
   },
   card: {
     marginBottom: 10,

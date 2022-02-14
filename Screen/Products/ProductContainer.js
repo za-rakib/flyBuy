@@ -123,7 +123,9 @@ const ProductContainer = () => {
               </View>
             ) : (
               <View style={styles.noMatch}>
-                <Text style={styles.noMatchText}>No Product found</Text>
+                <Text style={styles.noMatchText}>
+                  Product is not available right now
+                </Text>
               </View>
             )}
           </View>
