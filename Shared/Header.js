@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { Image, StyleSheet, Text, View} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Header() {
   return (

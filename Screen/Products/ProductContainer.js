@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import ProductList from "./ProductList";
 import SearchProduct from "./SearchProduct";
@@ -18,11 +18,10 @@ import CategoryFilter from "./CategoryFilter";
 const data = require("../../assets/data/products.json");
 const productsCategories = require("../../assets/data/categories.json");
 
-const ProductContainer = () => {
+const ProductContainer = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [focus, setFocus] = useState();
-
   const [categories, setCategory] = useState([]);
   const [productCategory, setProductCategory] = useState([]);
   const [active, setActive] = useState();
@@ -82,8 +81,8 @@ const ProductContainer = () => {
   return (
     <NativeBaseProvider>
       <VStack>
-        <Box p={3}>
-          <Input
+        <Box p={3} >
+          <Input 
             size="xl"
             variant="rounded"
             placeholder="Search"
@@ -99,7 +98,7 @@ const ProductContainer = () => {
         </Box>
       </VStack>
       {focus == true ? (
-        <SearchProduct productsFiltered={productsFiltered} />
+        <SearchProduct navigation={navigation} productsFiltered={productsFiltered} />
       ) : (
         <ScrollView>
           <View>
@@ -118,7 +117,11 @@ const ProductContainer = () => {
             {productCategory.length > 0 ? (
               <View style={styles.listContainer}>
                 {productCategory.map((item, index) => (
-                  <ProductList key={index} item={item} />
+                  <ProductList
+                    navigation={navigation}
+                    key={index}
+                    item={item}
+                  />
                 ))}
               </View>
             ) : (

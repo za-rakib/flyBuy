@@ -11,9 +11,12 @@ import ProductCard from "./ProductCard";
 
 let { width } = Dimensions.get("window");
 
-const ProductList = ({ item }) => {
+const ProductList = ({ navigation, item }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate("Product Detail", { item: item })}
+    >
       <View style={styles.card}>
         <ProductCard item={item} />
       </View>

@@ -1,13 +1,17 @@
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import ProductContainer from "./Screen/Products/ProductContainer";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
 import Header from "./Shared/Header";
+import Main from "./Navigators/Main";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Header />
-      <ProductContainer />
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={styles.container}>
+        <Header />
+        <Main/>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
