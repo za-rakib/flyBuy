@@ -7,6 +7,9 @@ import {
   Button,
 } from "react-native";
 import React from "react";
+import { connect } from "react-redux";
+import * as actions from "../../Redux/Actions/cartActions";
+
 let { width } = Dimensions.get("window");
 
 const ProductCard = ({ item }) => {
@@ -39,6 +42,12 @@ const ProductCard = ({ item }) => {
   );
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItemToCart: (product) =>
+      dispatch(actions.addToCart({ quantity: 1, product }))
+  };
+};
 export default ProductCard;
 
 const styles = StyleSheet.create({

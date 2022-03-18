@@ -28,7 +28,7 @@ export default function Main() {
           />
       )}} />
       
-       <Tab.Screen name="Cart" component={HomeNavigator}
+       <Tab.Screen name="Cart" component={Cart}
       options={{tabBarIcon:({color})=>(
           <Icon
           name="shopping-cart"

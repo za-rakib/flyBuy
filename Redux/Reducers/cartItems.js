@@ -1,18 +1,16 @@
 export const cartItem = (state = [], { type, payload }) => {
-    switch (type) {
-      case "ADD_TO_CART":
-        return [...state, payload];
-      case "REMOVE_FROM_CART":
-        return state.filter((item) => item !== payload);
-      case "CLEAR_CART":
-        return (state = []);
-    }
-    return state;
-  };
+  switch (type) {
+    case "ADD_TO_CART":
+      return { ...state, product: payload };
+    case "REMOVE_FROM_CART":
+      return state.filter((item) => item !== payload);
+    case "CLEAR_CART":
+      return (state = []);
+  }
+  return state;
+};
 
-
-
-// export const addCartItem = (state = [], { type, payload }) => {
+// export conIKst addCartItem = (state = [], { type, payload }) => {
 //   switch (type) {
 //     case "ADD_TO_CART":
 //       return [...state, payload];
@@ -37,4 +35,3 @@ export const cartItem = (state = [], { type, payload }) => {
 //       return state;
 //   }
 // };
- 
