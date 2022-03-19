@@ -8,9 +8,7 @@ import SingleProduct from "../Screen/Products/SingleProduct";
 const Stack = createStackNavigator();
 
 export default function HomeNavigator() {
-     const screenOptions = {
-    headerShown: false,
-  };
+  
   return (
     <Stack.Navigator screenOptions={{ headerShown: false}}>
       <Stack.Screen name="Home" component={ProductContainer} />
