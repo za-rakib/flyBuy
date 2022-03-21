@@ -1,11 +1,10 @@
 import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
-  Dimensions,
+Dimensions,
   Button,
+  ScrollView,
 } from "react-native";
 import { connect } from "react-redux";
 import {
@@ -16,24 +15,32 @@ import {
   HStack,
   Avatar,
   Divider,
+  Flex,
+  Text,
 } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as actions from "../../Redux/Actions/cartActions";
 let { width, height } = Dimensions.get("window");
 
 const Cart = ({ cartItems }) => {
+// total price
+  let total = 0;
+  cartItems.forEach((item) => {
+    return (total += item.product.item.price);
+  });
+
   return (
     <NativeBaseProvider>
       <Heading size="2xl" style={{ alignSelf: "center" }}>
         Cart
       </Heading>
       {cartItems.length ? (
-        <Container>
+        <ScrollView>
           {cartItems.map((item, index) => {
             return (
-              <>
-                <HStack my={2} key={index} style={styles.card}>
-                  <Box  style={styles.box1}>
+              <View key={index}>
+                <HStack my={1} style={styles.card}>
+                  <Box style={styles.box1}>
                     <Avatar
                       size="md"
                       source={{
@@ -49,14 +56,28 @@ const Cart = ({ cartItems }) => {
                     </Text>
                   </Box>
                   <Box style={styles.box3}>
-                    <Text style={styles.itemPrice}>${item.product.item.price}</Text>
+                    <Text style={styles.itemPrice}>
+                      ${item.product.item.price}
+                    </Text>
                   </Box>
                 </HStack>
-                <Divider bg="#7787b8" />
-              </>
+              </View>
             );
           })}
-        </Container>
+
+          <HStack style={styles.bottomContainer}>
+            <Box mr={5}>
+              <Text fontSize="xl">$ {total}</Text>
+            </Box>
+
+            <Box mx={5}>
+              <Button title="Clear" color="#ff3d3d" />
+            </Box>
+            <Box mx={4}>
+              <Button title="Checkout" color="#841584" />
+            </Box>
+          </HStack>
+        </ScrollView>
       ) : (
         <Container style={styles.emptyContainer}>
           <Text style={styles.emptyContainerText}>
@@ -71,30 +92,33 @@ const Cart = ({ cartItems }) => {
   );
 };
 
+// redux store
 const mapStateToProps = (state) => {
   const { addCartItem } = state;
   return { cartItems: addCartItem };
 };
+
 const styles = StyleSheet.create({
   card: {
     display: "flex",
     alignItems: "center",
-    width:width,
+    width: width,
+    backgroundColor: "#cad5fc",
+    padding: 5,
   },
   box1: {
     flex: 1.5,
     display: "flex",
     justifyContent: "center",
-    marginLeft:5,
+    marginLeft: 5,
   },
   box2: {
     flex: 5,
-    display: "flex",   
+    display: "flex",
   },
   box3: {
-      flex: 1.5,
+    flex: 1.5,
     display: "flex",
-    
   },
   itemName: {
     fontSize: 20,
@@ -109,11 +133,15 @@ const styles = StyleSheet.create({
     color: "#f5497d",
     fontSize: 25,
   },
-  itemPrice:{
+  itemPrice: {
     fontSize: 17,
     color: "#1a1e2b",
-  }
+  },
+  bottomContainer: {
+    marginTop: "40%",
+    marginLeft: width / 10,
+    marginBottom: "10%",
+  },
 });
 
 export default connect(mapStateToProps, null)(Cart);
-

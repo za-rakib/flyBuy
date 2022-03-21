@@ -1,8 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ProductContainer from "../Screen/Products/ProductContainer";
-import Cart from "../Screen/Cart/Cart";
 import SingleProduct from "../Screen/Products/SingleProduct";
 
 const Stack = createStackNavigator();
@@ -17,4 +15,4 @@ export default function HomeNavigator() {
   );
 }
 
-const styles = StyleSheet.create({});
+
