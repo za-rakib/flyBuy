@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     width: width / 2 - 20 - 10,
   },
   title: {
+    margin: 5,
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
