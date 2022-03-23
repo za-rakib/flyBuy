@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import Swiper from "react-native-swiper";
+import Swiper from 'react-native-swiper'
 let { width } = Dimensions.get("window");
 
 export default function Banner() {

@@ -15,8 +15,8 @@ const CartIcon = ({ cartItems }) => {
   );
 };
 const mapStateToProps = (state) => {
-  const { addCartItem } = state;
-  return { cartItems: addCartItem };
+  const { cartItem } = state;
+  return { cartItems:  cartItem };
 };
 
 export default connect(mapStateToProps, null)(CartIcon);
@@ -24,7 +24,7 @@ export default connect(mapStateToProps, null)(CartIcon);
 const styles = StyleSheet.create({
   badge: {
     position: "absolute",
-    left: 25,
+    left: 20,
     width: 25,
     height: 25,
     borderRadius: 25/2,

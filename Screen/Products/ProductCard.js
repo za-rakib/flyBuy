@@ -12,8 +12,8 @@ import * as actions from "../../Redux/Actions/cartActions";
 
 let { width } = Dimensions.get("window");
 
-const ProductCard = (props) => {
-  const { name, price, image, countInStock } = props.item;
+const ProductCard = ({ item, addItemToCart}) => {
+  const { name, price, image, countInStock } = item;
   //  console.log("Item, ", item);
   return (
     <View style={styles.container}>
@@ -36,7 +36,7 @@ const ProductCard = (props) => {
           <Button
             title={"Add"}
             color={"green"}
-            onPress={() => props.addItemToCart(props)}
+            onPress={() => addItemToCart(item)}
           />
         </View>
       ) : (
@@ -48,8 +48,9 @@ const ProductCard = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addItemToCart: (product) =>
-      dispatch(actions.addToCart({ quantity: 1, product })),
+    addItemToCart: (product) => {
+      dispatch(actions.addToCart({ quantity: 1, product }));
+    },
   };
 };
 
