@@ -25,31 +25,30 @@ import { SwipeListView } from "react-native-swipe-list-view";
 import CartItem from "./CartItem";
 let { width, height } = Dimensions.get("window");
 
-const Cart = ({ cartItems, clearCartItems, removeFromCart }) => {
-   //console.log("cartItem", cartItems);
+const Cart = ({ cartItems, clearCartItems, removeFromCart,navigation }) => {
+  //console.log("cartItem", cartItems);
   // total price
   let total = 0;
-    // cartItems.forEach((item) => {
-    //   return (total += item.product.item.price);
-    // });
-
+  let totalPrice;
+  cartItems.forEach((item) => {
+    return (total += item.product.price);
+  });
+  totalPrice = Number(total).toFixed(3);
   return (
     <NativeBaseProvider>
       <Heading size="2xl" style={{ alignSelf: "center" }}>
         Cart
       </Heading>
       {cartItems.length ? (
-        <View>
+        <>
           {/* {cartItems.map((item, index) => {
             return <CartItem item={item} key={index} />;
           })} */}
           <SwipeListView
             data={cartItems}
-            renderItem={(data) => (
-              <CartItem item={data} />
-            )}
+            renderItem={(data) => <CartItem item={data} />}
             renderHiddenItem={(data) => (
-              <View style={styles.hiddenContainer} >
+              <View style={styles.hiddenContainer}>
                 <TouchableOpacity
                   style={styles.hiddenButton}
                   onPress={() => removeFromCart(data.item)}
@@ -70,11 +69,11 @@ const Cart = ({ cartItems, clearCartItems, removeFromCart }) => {
             leftOpenValue={75}
             stopLeftSwipe={75}
             rightOpenValue={-75}
-            keyExtractor={(index) => index.toString()}
+            keyExtractor={() => Math.random().toString()}
           />
           <HStack style={styles.bottomContainer}>
             <Box mr={5}>
-              <Text fontSize="xl">$ {total}</Text>
+              <Text fontSize="xl">$ {totalPrice}</Text>
             </Box>
 
             <Box mx={5}>
@@ -85,17 +84,21 @@ const Cart = ({ cartItems, clearCartItems, removeFromCart }) => {
               />
             </Box>
             <Box mx={4}>
-              <Button title="Checkout" color="#841584" />
+              <Button
+                title="Checkout"
+                color="#841584"
+                onPress={() => navigation.navigate("Checkout")}
+              />
             </Box>
           </HStack>
-        </View>
+        </>
       ) : (
         <Container style={styles.emptyContainer}>
           <Text style={styles.emptyContainerText}>
-            Looks like your card id empty
+            Looks like your card id empty..
           </Text>
           <Text style={styles.emptyContainerText}>
-            Please add some items to get started
+            Please add some item to get started..
           </Text>
         </Container>
       )}
@@ -105,7 +108,7 @@ const Cart = ({ cartItems, clearCartItems, removeFromCart }) => {
 
 // redux store
 const mapStateToProps = (state) => {
-//  console.log("state", state);
+  //  console.log("state", state);
   const { cartItem } = state;
   return { cartItems: cartItem };
 };
@@ -123,18 +126,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(Cart);
 const styles = StyleSheet.create({
   emptyContainer: {
     height: height,
-    marginTop: height / 4,
-    marginLeft: width / 10,
+    marginTop: height / 10,
+    marginLeft: width / 15,
   },
   emptyContainerText: {
-    color: "#f5497d",
+    color: "#fc2b5f",
     fontSize: 25,
+    padding: 3,
+    fontWeight: "bold",
   },
 
   bottomContainer: {
-    marginTop: "40%",
+    marginTop: "5%",
     marginLeft: width / 10,
-    marginBottom: "10%",
+    marginBottom: "5%",
   },
   hiddenContainer: {
     flex: 1,
