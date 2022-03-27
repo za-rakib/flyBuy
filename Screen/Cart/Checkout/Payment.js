@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function Checkout() {
+export default function Payment() {
   return (
     <View>
-      <Text>Checkout</Text>
+      <Text>Payment</Text>
     </View>
   )
 }

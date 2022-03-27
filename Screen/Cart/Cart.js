@@ -25,7 +25,7 @@ import { SwipeListView } from "react-native-swipe-list-view";
 import CartItem from "./CartItem";
 let { width, height } = Dimensions.get("window");
 
-const Cart = ({ cartItems, clearCartItems, removeFromCart,navigation }) => {
+const Cart = ({ cartItems, clearCartItems, removeFromCart, navigation }) => {
   //console.log("cartItem", cartItems);
   // total price
   let total = 0;
