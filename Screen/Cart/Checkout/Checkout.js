@@ -16,7 +16,7 @@ const Checkout = (props) => {
   const [city, setCity] = useState();
   const [zip, setZip] = useState();
   const [phone, setPhone] = useState();
-  const [country, setCountry] = useState(country);
+  const [country, setCountry] = useState();
 
   useEffect(() => {
     setOrderItems(props.cartItems);
@@ -37,7 +37,6 @@ const Checkout = (props) => {
     };
     props.navigation.navigate("Payment", { order: order });
   };
-
   return (
     <NativeBaseProvider>
       <KeyboardAwareScrollView
@@ -52,14 +51,12 @@ const Checkout = (props) => {
             value={phone}
             keyboardType={"numeric"}
             onChangeText={(text) => setPhone(text)}
-
           />
           <Input
             placeholder={"Shipping Address 1"}
             name={"ShippingAddress1"}
             value={address}
             onChangeText={(text) => setAddress(text)}
-
           />
           <Input
             placeholder={"Shipping Address 2"}
@@ -79,7 +76,6 @@ const Checkout = (props) => {
             value={zip}
             keyboardType={"numeric"}
             onChangeText={(text) => setZip(text)}
-         
           />
           <Center>
             <Box w="3/4" maxW="300">
@@ -91,7 +87,6 @@ const Checkout = (props) => {
                 iosIcon={<Icon name="arrow-down" color={"#0071ff"} />}
                 mt={1}
                 onValueChange={(e) => setCountry(e)}
-                key={Math.random()}
               >
                 {countries.map((c, index) => (
                   <Select.Item key={index} label={c.name} value={c.code} />
