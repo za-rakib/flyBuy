@@ -44,7 +44,7 @@ const Checkout = (props) => {
         extraHeight={200}
         enableOnAndroid={true}
       >
-        <FormContainer title="Shipping Address">
+        <FormContainer  title="Shipping Address">
           <Input
             placeholder={"Address"}
             name={"Phone"}
@@ -89,7 +89,7 @@ const Checkout = (props) => {
                 onValueChange={(e) => setCountry(e)}
               >
                 {countries.map((c, index) => (
-                  <Select.Item key={index} label={c.name} value={c.code} />
+                  <Select.Item key={Math.random().toString()} label={c.name} value={c.code} />
                 ))}
               </Select>
             </Box>

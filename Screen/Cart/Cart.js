@@ -88,6 +88,7 @@ const Cart = ({ cartItems, clearCartItems, removeFromCart, navigation }) => {
                 title="Checkout"
                 color="#841584"
                 onPress={() => navigation.navigate("Checkout")}
+                key={Math.random()}
               />
             </Box>
           </HStack>

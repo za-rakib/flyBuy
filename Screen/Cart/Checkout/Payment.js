@@ -1,4 +1,4 @@
-import { StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions, Button } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import React, { useState } from "react";
 let { width, height } = Dimensions.get("window");
@@ -32,7 +32,7 @@ const cardPayment = [
 ];
 
 export default function Payment(props) {
-  const order = props && props.route.params;
+  const order = props.route.params;
   const [selected, setSelected] = useState();
   const [card, setCard] = useState();
 
@@ -102,13 +102,21 @@ export default function Payment(props) {
                 mt={1}
                 onValueChange={(c) => console.log("c", c)}
               >
-                {cardPayment.map((c, index) => (
-                  <Select.Item key={index} label={c.name} value={c.name} />
-                ))}
+                {cardPayment.map((c, index) => {
+                  return (
+                    <Select.Item key={c.name} label={c.name} value={c.name} />
+                  );
+                })}
               </Select>
             </Box>
           </Center>
         ) : null}
+        <View style={{ marginTop: 10, alignSelf: "center" }}>
+          <Button
+            title="Confirm"
+            onPress={() => props.navigation.navigate("Confirm", { order })}
+          />
+        </View>
       </Container>
     </NativeBaseProvider>
   );

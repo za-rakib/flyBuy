@@ -4,9 +4,9 @@ let { width, height } = Dimensions.get("window");
 
 export default function FormContainer(props) {
   return (
-    <ScrollView  contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>{props.title}</Text>
-     {props.children}
+  {props.children}
     </ScrollView>
   );
 }
