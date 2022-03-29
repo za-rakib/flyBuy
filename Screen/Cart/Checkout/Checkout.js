@@ -35,7 +35,7 @@ const Checkout = (props) => {
       country,
       orderItems,
     };
-    props.navigation.navigate("Payment", { order: order });
+    props && props.navigation.navigate("Payment", { order: order });
   };
   return (
     <NativeBaseProvider>
@@ -44,9 +44,9 @@ const Checkout = (props) => {
         extraHeight={200}
         enableOnAndroid={true}
       >
-        <FormContainer  title="Shipping Address">
+        <FormContainer title="Shipping Address">
           <Input
-            placeholder={"Address"}
+            placeholder={"Phon"}
             name={"Phone"}
             value={phone}
             keyboardType={"numeric"}
@@ -89,7 +89,11 @@ const Checkout = (props) => {
                 onValueChange={(e) => setCountry(e)}
               >
                 {countries.map((c, index) => (
-                  <Select.Item key={Math.random().toString()} label={c.name} value={c.code} />
+                  <Select.Item
+                    key={Math.random().toString()}
+                    label={c.name}
+                    value={c.code}
+                  />
                 ))}
               </Select>
             </Box>

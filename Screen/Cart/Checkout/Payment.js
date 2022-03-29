@@ -100,7 +100,7 @@ export default function Payment(props) {
                 placeholder="Choose Card"
                 iosIcon={<Icon name="arrow-down" color={"#0071ff"} />}
                 mt={1}
-                onValueChange={(c) => console.log("c", c)}
+                onValueChange={(c) => setCard(c)}
               >
                 {cardPayment.map((c, index) => {
                   return (
