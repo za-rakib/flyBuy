@@ -12,11 +12,13 @@ import {
   Text,
   Center,
 } from "native-base";
+import { connect } from "react-redux";
+import * as actions from "../../Redux/Actions/cartActions";
 
-export default function SingleProduct({ navigation, route }) {
+const SingleProduct = ({ navigation, route, addItemToCart }) => {
   const [item, setItem] = useState(route.params.item);
   const [availability, setAvailability] = useState("");
-  console.log(item);
+  //   console.log(item);
   return (
     <NativeBaseProvider style={styles.container}>
       <ScrollView style={{ marginBottom: 80, padding: 5 }}>
@@ -43,15 +45,33 @@ export default function SingleProduct({ navigation, route }) {
           <View style={styles.price}>
             <Text style={styles.priceText}>${item.price}</Text>
           </View>
-          <View>
-            <Button px="5" title={"Add"} color={"green"} />
-          </View>
+          {item.countInStock > 0 ? (
+            <View style={{ marginBottom: 30 }}>
+              <Button
+                style={{ marginTop: 5 }}
+                title={"Add"}
+                color={"green"}
+                onPress={() => addItemToCart(item)}
+              />
+            </View>
+          ) : (
+            <Text style={{ marginTop: 20 }}>Currently unavailable</Text>
+          )}
         </View>
       </ScrollView>
     </NativeBaseProvider>
   );
-}
+};
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItemToCart: (product) => {
+      dispatch(actions.addToCart({ quantity: 1, product }));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SingleProduct);
 const styles = StyleSheet.create({
   container: {
     position: "relative",

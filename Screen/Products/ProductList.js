@@ -15,7 +15,7 @@ const ProductList = ({ navigation, item }) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate("Product Detail", { item: item })}
+      onPress={() => navigation.navigate("Single Product", { item: item })}
     >
       <View style={styles.card}>
         <ProductCard item={item} />

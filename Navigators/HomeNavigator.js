@@ -11,7 +11,7 @@ export default function HomeNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false}}>
       <Stack.Screen name="Home" component={ProductContainer} />
-      <Stack.Screen name="Product Detail" component={SingleProduct} />
+      <Stack.Screen name="Single Product" component={SingleProduct} />
     </Stack.Navigator>
   );
 }
